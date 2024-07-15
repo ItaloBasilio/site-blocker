@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Configurações do Site Blocker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      margin: 5px 0;
+    }
+    .feedback {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bloquear Sites</h1>
+  <input type="text" id="siteInput" placeholder="Adicionar URL do site">
+  <button id="addSite">Adicionar</button>
+  <button id="blockAll">Bloquear Todos os Sites</button>
+  <div id="feedback" class="feedback"></div>
+  <ul id="siteList"></ul>
+  <script src="options.js"></script>
+</body>
+</html>
