@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Configurações do Site Blocker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações do Site Blocker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,8 +22,14 @@
   <input type="text" id="siteInput" placeholder="Adicionar URL do site">
   <button id="addSite">Adicionar</button>
   <button id="blockAll">Bloquear Todos os Sites</button>
+  <h2>Liberação de Sites</h2>
+  <input type="text" id="allowSiteInput" placeholder="Adicionar URL do site liberado">
+  <button id="allowSite">Liberar</button>
   <div id="feedback" class="feedback"></div>
+  <h3>Sites Bloqueados</h3>
   <ul id="siteList"></ul>
+  <h3>Sites Liberados</h3>
+  <ul id="allowList"></ul>
   <script src="options.js"></script>
 </body>
 </html>
