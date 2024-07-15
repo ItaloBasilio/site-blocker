@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const siteList = document.getElementById('siteList');
     const allowList = document.getElementById('allowList');
     const feedback = document.getElementById('feedback');
-  
+    const passwordInput = document.getElementById('passwordInput');
+    const verifyPasswordBtn = document.getElementById('verifyPassword');
+
+    let password = 'Chinelos@2024'; // Defina sua senha aqui
+
     const renderList = (sites, listElement) => {
       listElement.innerHTML = '';
       sites.forEach(site => {
@@ -39,6 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   
     const addNewSite = () => {
+      if (!verifyPassword()) {
+        feedback.textContent = 'Senha incorreta!';
+        setTimeout(() => feedback.textContent = '', 2000);
+        return;
+      }
+
       const newSite = siteInput.value.trim();
       if (newSite) {
         chrome.storage.sync.get(['blockedSites'], (result) => {
@@ -58,6 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   
     const removeSite = (site, listElement) => {
+      if (!verifyPassword()) {
+        feedback.textContent = 'Senha incorreta!';
+        setTimeout(() => feedback.textContent = '', 2000);
+        return;
+      }
+
       const key = listElement === siteList ? 'blockedSites' : 'allowedSites';
       chrome.storage.sync.get([key], (result) => {
         const sites = result[key] || [];
@@ -70,6 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   
     const allowNewSite = () => {
+      if (!verifyPassword()) {
+        feedback.textContent = 'Senha incorreta!';
+        setTimeout(() => feedback.textContent = '', 2000);
+        return;
+      }
+
       const newSite = allowSiteInput.value.trim();
       if (newSite) {
         chrome.storage.sync.get(['allowedSites'], (result) => {
@@ -89,6 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   
     const blockAllSites = () => {
+      if (!verifyPassword()) {
+        feedback.textContent = 'Senha incorreta!';
+        setTimeout(() => feedback.textContent = '', 2000);
+        return;
+      }
+
       chrome.storage.sync.set({ blockedSites: ['*://*/*'] }, () => {
         renderList(['*://*/*'], siteList);
         feedback.textContent = 'Todos os sites foram bloqueados!';
@@ -96,6 +124,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
   
+    const verifyPassword = () => {
+      return passwordInput.value === password;
+    };
+  
+    verifyPasswordBtn.onclick = () => {
+      if (verifyPassword()) {
+        feedback.textContent = 'Senha correta!';
+      } else {
+        feedback.textContent = 'Senha incorreta!';
+      }
+      setTimeout(() => feedback.textContent = '', 2000);
+    };
+
     addSite.onclick = addNewSite;
     blockAll.onclick = blockAllSites;
     allowSite.onclick = allowNewSite;
